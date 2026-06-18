@@ -1,0 +1,56 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # 1. Microservicio de Usuarios (Puerto 8081)
+        - id: service-usuarios
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/usuarios/**
+
+        # 2. Microservicio de Emergencias - Ruta Emergencias (Puerto 8084)
+        - id: service-emergencias-alertas
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/emergencias/**
+
+        # 3. Microservicio de Emergencias - Ruta Notificaciones (Puerto 8084)
+        - id: service-emergencias-avisos
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/notificaciones/**
+
+        # 4. Microservicio de Rescates - Ruta Rescatistas (Puerto 8082)
+        - id: service-rescates-personal
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/rescatistas/**
+
+        # 5. Microservicio de Rescates - Ruta Asignaciones (Puerto 8082)
+        - id: service-rescates-misiones
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/asignaciones/**
+
+        # 6. Microservicio de Rescates - Ruta Reportes (Puerto 8082)
+        - id: service-rescates-bitacora
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/reportes-rescate/**
+
+        # 7. Microservicio de Donaciones - Ruta Donaciones (Puerto 8083)
+        - id: service-donaciones-pagos
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/donaciones/**
+
+        # 8. Microservicio de Donaciones - Ruta Comprobantes (Puerto 8083)
+        - id: service-donaciones-recibos
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/comprobantes/**
