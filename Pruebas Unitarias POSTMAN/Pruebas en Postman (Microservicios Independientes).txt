@@ -1,0 +1,87 @@
+
+Paso A: Crear el Usuario Base
+
+Microservicio: service-usuarios (Puerto 8081)
+
+Método / URL: POST http://localhost:8081/api/v1/usuarios
+
+JSON Body:
+
+JSON
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "correo": "juan.perez@email.com",
+  "telefono": "+56912345678",
+  "rol": "REPORTANTE"
+}
+Resultado: Genera el idUsuario: 1.
+
+
+
+CU 01: Reportar Emergencia
+Microservicio: service-emergencias (Puerto 8084)
+
+Método / URL: POST http://localhost:8084/api/v1/emergencias
+
+JSON Body:
+
+JSON
+{
+  "idUsuario": 1,
+  "tipo": "Extravío",
+  "descripcion": "Montañista perdido cerca del refugio Plantat, herido en un tobillo.",
+  "ubicacion": "-33.7845, -70.1234"
+}
+
+
+
+
+Paso B: Crear el Rescatista Base
+
+Microservicio: service-rescates (Puerto 8082)
+
+Método / URL: POST http://localhost:8082/api/v1/rescatistas
+
+JSON Body:
+
+JSON
+{
+  "nombre": "Carlos Silva",
+  "especialidad": "Alta Montaña",
+  "estadoAvailability": "DISPONIBLE"
+}
+Resultado: Genera el idRescatista: 1.
+
+
+
+
+CU 02: Asignar Misión de Rescate
+Microservicio: service-rescates (Puerto 8082)
+
+Método / URL: POST http://localhost:8082/api/v1/asignaciones
+
+JSON Body:
+
+JSON
+{
+  "idEmergencia": 1,
+  "idRescatista": 1
+}
+
+
+CU 03: Registrar Donación
+Microservicio: service-donaciones (Puerto 8083)
+
+Método / URL: POST http://localhost:8083/api/v1/donaciones
+
+JSON Body:
+
+JSON
+{
+  "idUsuario": 1,
+  "monto": 25000.00,
+  "metodoPago": "CREDITO",
+  "estado": "COMPLETADA"
+}
+
