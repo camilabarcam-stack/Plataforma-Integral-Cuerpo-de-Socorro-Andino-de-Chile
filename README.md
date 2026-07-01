@@ -83,6 +83,3 @@ JSON
   "metodoPago": "CREDITO",
   "estado": "COMPLETADA"
 }
-
-Integraciones Externas
-Google Maps API: El atributo ubicacion (Latitud/Longitud) del servicio de emergencias está estructurado para ser consumido nativamente en el front-end por los marcadores del componente de Google Maps.
